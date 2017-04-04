@@ -5,9 +5,9 @@ public aspect testaspect {
 		call(* coffeemaker..*(..));
 	
 	before(): funcName(){
-		System.out.println("before weave");
+		//System.out.println("before weave");
 	}
 	after(): funcName(){
-		System.out.println("after weave");
+		//System.out.println("after weave");
 	}
 }
