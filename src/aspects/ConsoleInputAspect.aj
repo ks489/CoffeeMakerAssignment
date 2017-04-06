@@ -1,17 +1,39 @@
 package aspects;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
+import coffeemaker.CoffeeMaker;
+
 public aspect ConsoleInputAspect {
-	pointcut checkRecipeMaxIngredientSize(int amount):
-		args(amount) &&
-		call(* coffeemaker.Recipe.setAmt*(int));
+	pointcut consoleReadLine():
+		//call(* readLine());
+		//initialization(*..InputStreamReader.new(System.in));
+		//within(coffeemaker.Main);
+		call(public java.lang.String java.io.BufferedReader.readLine());// &&// &&
+		//call (public java.io.BufferedReader(java.io.Reader)) ||
+		//call(public java.io.InputStreamReader(java.io.InputStream)) ||
+		//get(public static final java.io.InputStream java.lang.System.in);
+
 	
-	before(int amount): checkRecipeMaxIngredientSize(amount){
-		//System.out.println("Recipe before weave");		
-		//System.out.println("The amount set is : " + amount);
-		if(amount > 30){
-			throw new IllegalArgumentException();
+	after() returning(String retString): consoleReadLine(){
+		if (tryParseInt(retString)) {  
+		   int number = Integer.parseInt(retString);
+		   if(number < 0){
+			   System.out.println("Input value from console is below 0");
+		   }		   
 		}
 	}
+	
+	private static boolean tryParseInt(String value){
+		try {  
+	         Integer.parseInt(value);  
+	         return true;  
+	      } catch (NumberFormatException e) {  
+	         return false;  
+	      }  
+	}
 }
+
 
 
