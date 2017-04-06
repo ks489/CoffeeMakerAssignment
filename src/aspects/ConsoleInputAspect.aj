@@ -7,14 +7,7 @@ import coffeemaker.CoffeeMaker;
 
 public aspect ConsoleInputAspect {
 	pointcut consoleReadLine():
-		//call(* readLine());
-		//initialization(*..InputStreamReader.new(System.in));
-		//within(coffeemaker.Main);
-		call(public java.lang.String java.io.BufferedReader.readLine());// &&// &&
-		//call (public java.io.BufferedReader(java.io.Reader)) ||
-		//call(public java.io.InputStreamReader(java.io.InputStream)) ||
-		//get(public static final java.io.InputStream java.lang.System.in);
-
+		call(public java.lang.String java.io.BufferedReader.readLine());
 	
 	after() returning(String retString): consoleReadLine(){
 		if (tryParseInt(retString)) {  
