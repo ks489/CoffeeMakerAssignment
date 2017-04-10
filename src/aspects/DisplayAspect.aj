@@ -101,7 +101,4 @@ public aspect DisplayAspect {
 		System.out.println("Got the edit recipe method");
 		Main.mainMenu();
 	}
-	
-	//inputOutput
-
 }
