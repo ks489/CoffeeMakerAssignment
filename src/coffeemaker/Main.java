@@ -12,7 +12,8 @@ import java.io.InputStreamReader;
  */
 public class Main {
     private static CoffeeMaker coffeeMaker;
-
+    //I have commented out anything that was removed from this project and abstracted into an aspect.
+    //Most of the commented out code was display related
     /*public static void mainMenu() {
         System.out.println("1. Add a recipe");
         System.out.println("2. Delete a recipe");

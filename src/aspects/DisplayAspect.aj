@@ -3,8 +3,17 @@ package aspects;
 import coffeemaker.Inventory;
 import coffeemaker.Main;
 
+/* Question 4
+ * Refactor question. We abstracted anything related to console display
+ * and printing to the console. The original source code has commented out 
+ * code that has been replaced inside this aspect to show that we weave
+ * the original functionality back into the original source code
+ */
 public aspect DisplayAspect {
 	
+	//Original print menu for the coffee maker.
+	//Abstracted internally to be called multiple times
+	//From pointcuts
 	public static void Main.mainMenu() {
 	    System.out.println("1. Add a recipe");
 	    System.out.println("2. Delete a recipe");
@@ -25,6 +34,9 @@ public aspect DisplayAspect {
 	    if(userInput == 6) makeCoffee();
 	    if(userInput == 0) System.exit(0);
 	}
+	
+	//All methods caught to display the menu options and any additional
+	//console display messages
 	
 	pointcut addInventoryMethod():
 		call(* coffeemaker.Main.addInventory());// &&
@@ -56,8 +68,7 @@ public aspect DisplayAspect {
 	after(): mainMethod(){
 		System.out.println("Got the main(string[]) method");
 		Main.mainMenu();
-	}
-	
+	}	
 	
 	pointcut addRecipeMethod():
 		call(* coffeemaker.Main.addRecipe());// &&
